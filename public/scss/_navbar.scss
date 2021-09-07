@@ -1,0 +1,410 @@
+@import '_variables.scss';
+
+body {
+    a:link 
+{ 
+ text-decoration:none; 
+} 
+    .navbar{
+        background-color: $ctaColor;
+        
+    }
+    
+    .navbar-nav.me-auto{
+        margin: auto;
+        
+    }
+    .nav-link{
+        margin: 0 20px;
+    }
+    .navbar li a:hover{
+        background-color: #f0e195;
+        border-radius: 10px;
+        
+    }
+    
+    .form-control{
+        border: 1px solid $black;
+    }
+    .btn.btn-primary{
+        border: 1px solid $black;
+        background-color: $ctaColor;
+        color: black;
+        
+
+    }
+    .btn.btn-outline-primary{
+        background-color: white;
+        color: black;
+        border-radius: 5px 0px 0px 5px;
+        
+        
+    }
+    .btn.btn-outline-primary.eff{
+        // border: 1px solid $black;
+        background-color: $ctaColor;
+        color: black;
+        border-radius: 0px 5px 5px 0px;
+        
+        
+    }
+    .logo{
+        width: 50px;
+    }
+    .img-list{
+        max-width: 100px;
+    }
+}
+
+
+// ##################################################################### //
+// ########################### CSS ADAPTATIF ########################### //
+// ##################################################################### //
+
+@media screen and (max-width: 1400px) {
+    body{
+
+        .btn.btn-outline-primary{
+        
+        height: auto;    
+        background-color: white;
+        color: black;
+        border-radius: 5px 0px 0px 5px;
+        
+        
+        
+        
+    }
+    .btn.btn-outline-primary.eff{
+        
+        height: auto;
+        background-color: $ctaColor;
+        color: black;
+        border-radius: 0px 5px 5px 0px;
+        
+        
+        
+        
+    }
+    }
+}
+
+@media screen and (max-width: 1170px) {
+    body{
+
+        .navbar{
+            background-color: $ctaColor;
+            width: 100%;
+            
+        }
+        .navbar-nav.me-auto{
+            margin: auto;
+            
+        }
+        .btn.btn-outline-primary{
+        
+                
+            background-color: white;
+            color: black;
+            border-radius: 5px 0px 0px 5px;
+            
+            
+            
+        }
+        .btn.btn-outline-primary.eff{
+            
+             
+            background-color: $ctaColor;
+            color: black;
+            border-radius: 0px 5px 5px 0px;
+            
+            
+            
+        }
+    }
+}
+
+@media screen and (max-width:1050px){
+    
+    body{
+            .navbar{
+            background-color: $ctaColor;
+            width: 100%;
+            
+        }
+
+            .navbar-nav.me-auto{
+            margin: auto;
+            
+        }
+            .btn.btn-outline-primary{
+            
+           
+            background-color: white;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+        .btn.btn-outline-primary.eff{
+        
+            
+            background-color: $ctaColor;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    body{
+
+            .navbar{
+            background-color: $ctaColor;
+            width: 100%;
+            
+        }
+        .navbar-nav.me-auto{
+            margin: auto;
+            
+        }
+            .btn.btn-outline-primary{
+        
+            
+            background-color: white;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            margin: 2px;
+            
+            
+        }
+        .btn.btn-outline-primary.eff{
+            
+            
+            background-color: $ctaColor;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            margin: 2px;
+            
+            
+            
+            
+        }
+    }
+    li a:hover{
+        background-color: #edd34d;
+        
+          
+    }
+}
+
+@media screen and (max-width: 960px) {
+    body{
+        .navbar{
+            background-color: $ctaColor;
+            width: 100%;
+            
+        }
+        .navbar-nav.me-auto{
+            margin: auto;
+            
+        }
+        .btn.btn-outline-primary{
+        
+                
+            background-color: white;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+        .btn.btn-outline-primary.eff{
+            
+             
+            background-color: $ctaColor;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+    }
+}
+
+@media screen and (max-width: 780px) {
+    body{
+   
+        .navbar{
+            background-color: $ctaColor;
+            width: 100%;
+            
+        }
+        .navbar-nav.me-auto{
+            margin: auto;
+            
+        }
+        .btn.btn-outline-primary{
+        
+                
+            background-color: white;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+        .btn.btn-outline-primary.eff{
+            
+             
+            background-color: $ctaColor;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+    }
+}
+@media screen and (max-width: 750px) {
+    body{
+
+    
+            .navbar{
+            background-color: $ctaColor;
+            width: 100%;
+            
+        }
+        .navbar-nav.me-auto{
+            margin: auto;
+            
+        }
+        .btn.btn-outline-primary{
+            
+               
+            background-color: white;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+        .btn.btn-outline-primary.eff{
+            
+             
+            background-color: $ctaColor;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+    }
+ }
+
+@media screen and (max-width: 670px) {
+    body{
+            .navbar{
+            background-color: $ctaColor;
+            width: 100%;
+            
+        }
+        .navbar-nav.me-auto{
+            margin: auto;
+            
+        }
+        .btn.btn-outline-primary{
+        
+                
+            background-color: white;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        }
+        .btn.btn-outline-primary.eff{
+        
+             
+            background-color: $ctaColor;
+            color: black;
+            border-radius: 5px 5px 5px 5px;
+            
+            
+            
+        } 
+    }
+ }
+
+@media screen and (max-width: 580px) {
+   body{
+       .navbar{
+        background-color: $ctaColor;
+        width: 100%;
+        
+    }
+    .navbar-nav.me-auto{
+        margin: auto;
+        
+    }
+    .btn.btn-outline-primary{
+        
+            
+        background-color: white;
+        color: black;
+        border-radius: 5px 5px 5px 5px;
+        
+        
+        
+    }
+    .btn.btn-outline-primary.eff{
+        
+         
+        background-color: $ctaColor;
+        color: black;
+        border-radius: 5px 5px 5px 5px;
+        
+        
+        
+    }
+   }
+    
+}
+
+ @media screen and (max-width: 470px) {
+     body{
+         .navbar{
+        background-color: $ctaColor;
+        width: 100%;
+        
+    }
+    .navbar-nav.me-auto{
+        margin: auto;
+        
+    }
+    .btn.btn-outline-primary{
+        
+            
+        background-color: white;
+        color: black;
+        border-radius: 5px 5px 5px 5px;
+        
+        
+        
+    }
+    .btn.btn-outline-primary.eff{
+        
+         
+        background-color: $ctaColor;
+        color: black;
+        border-radius: 5px 5px 5px 5px;
+        
+        
+        
+    }          
+     } 
+ }

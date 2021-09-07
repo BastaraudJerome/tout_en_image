@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Photo{% endblock %}
+
+{% block body %}
+    <h1>Edit Photo</h1>
+<a href="{{ path('admin_photo_index') }}">
+    Retour
+</a>
+
+{{ include('admin_photo/_form.html.twig', {'button_label': '<i class="fa fa-floppy-o" aria-hidden="true"></i>'}) | raw }}
+
+    {{ include('admin_photo/_delete_form.html.twig') }}
+{% endblock %}

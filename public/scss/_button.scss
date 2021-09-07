@@ -1,0 +1,19 @@
+@import '_variables.scss';
+
+body{
+    .btn.btn-primary-del{
+        border: 1px solid $black;
+        background-color: $delete;
+        color: black;
+    }
+    .btn.btn-primary-edit{
+        border: 1px solid $black;
+        background-color: $edit;
+        color: black;
+    }
+    .btn.btn-primary-show{
+        border: 1px solid $black;
+        background-color: $show;
+        color: black;
+    }
+}

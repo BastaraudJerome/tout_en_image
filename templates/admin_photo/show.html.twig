@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photo{% endblock %}
+
+{% block body %}
+    <h1>Photo</h1>
+<a class="btn btn-primary" href="{{ path('admin_photo_index') }}">Retour</a>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ photo.id }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('image/photos/' ~ photo.imageName) }}" alt="{{ photo.titre }}" class="img-list"></td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ photo.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ photo.description }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ photo.updatedAt ? photo.updatedAt|date('d-m-Y') : '' }}</td>
+            </tr>
+            
+            
+        </tbody>
+    </table>
+
+    
+
+<a href="{{ path('admin_photo_edit', {'id': photo.id}) }}">
+    <i class="fa fa-pencil btn btn-primary-edit my-1" aria-hidden="true"></i>
+</a>
+
+
+    {{ include('admin_photo/_delete_form.html.twig') }}
+{% endblock %}

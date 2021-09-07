@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Photo{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une Photo</h1>
+
+    {{ include('admin_photo/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('admin_photo_index') }}">Retour</a>
+{% endblock %}
