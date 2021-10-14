@@ -18,13 +18,13 @@
                     <img src="{{ asset('images/photos/' ~ photo.imageName ) }}" alt="{{ photo.titre }}" class="img">
                 </div> 
             {% endfor %}
-            {% if is_granted("ROLE_USER") %}               
+            {# {% if is_granted("ROLE_USER") %}               
                         <div class="container">
                             {{form_start(photo)}}
                                 {{form_widget(photo)}}
                             {{form_end(photo)}}
                         </div>              
-                {% endif %}
+                {% endif %} #}
         {% else %}
             <div class="col-12">
                 <h4>Aucune photos </h4>         

@@ -42,9 +42,12 @@ class AdminUserController extends AbstractController
             if($role=='user'){
                 $user->setRoles(["ROLE_USER"]);
             }elseif($role=='asso'){
-                $user->setRoles(["ROLE_USER", "ROLE_ASSO"]);
-            }else{
-                $user->setRoles(["ROLE_USER", "ROLE_ASSO","ROLE_ADMIN"]);
+                $user->setRoles(["ROLE_ASSO"]);
+            }elseif($role == 'membre') {
+                $user->setRoles(["ROLE_MEMBRE"]);
+            }
+            else{
+                $user->setRoles(["ROLE_USER", "ROLE_ASSO", "ROLE_MEMBRE","ROLE_ADMIN"]);
             }    
             $user->setPassword($uphi->hashPassword($user, $user->getPlainPassword()));
             $user->setIsVerified(true);
@@ -73,6 +76,9 @@ class AdminUserController extends AbstractController
         else if(in_array("ROLE_ASSO", $user->getRoles())){
             $role= "asso";
         }
+        else if(in_array("ROLE_MEMBRE", $user->getRoles())){
+            $role= "membre";
+        }
         else{
             $role = "user";
         }
@@ -95,13 +101,20 @@ class AdminUserController extends AbstractController
             $roleToCheck = $userForData["role"]; // on récupère la valeur du choiceType de la proprieté $role dans le formulaire
             if($roleToCheck === "ROLE_ADMIN"){
                 
-                $user->setRoles(["ROLE_USER", "ROLE_ASSO", "ROLE_ADMIN"]);
+                $user->setRoles(["ROLE_USER", "ROLE_ASSO", "ROLE_MEMBRE","ROLE_ADMIN"]);
 
-            }elseif($roleToCheck === "ROLE_ASSO"){
+            }
+            elseif($roleToCheck === "ROLE_ASSO"){
 
-                $user->setRoles(["ROLE_USER", "ROLE_ASSO"]);
+                $user->setRoles(["ROLE_ASSO"]);
             
-            }else{
+            }
+            elseif($roleToCheck === "ROLE_MEMBRE"){
+
+                $user->setRoles(["ROLE_MEMBRE"]);
+            
+            }
+            else{
 
                 $user->setRoles(["ROLE_USER"]);
             }

@@ -16,7 +16,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('avatar', AvatarType::class)
+            ->add('avatar', AvatarType::class, ["required" => false])
             ->add('pseudo')
             ->add('name')
             ->add('firstname')
@@ -25,6 +25,7 @@ class UserType extends AbstractType
             ->add('role', ChoiceType::class, ['choices' => [
                 'Administrateur' => "ROLE_ADMIN",
                 'Association' => "ROLE_ASSO",
+                'Membre' => "ROLE_MEMBRE",
                 'Utilisateur'    => "ROLE_USER"
                 ]])
             ->remove('password')

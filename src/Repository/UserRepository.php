@@ -57,7 +57,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult();
         }
-        return $this->createQueryBuilder('u')
+            if ($role==='membre'){
+            return $this->createQueryBuilder('u')
             ->where('u.roles LIKE :role')
             ->andWhere('u.roles NOT LIKE :role2')
             ->andWhere('u.roles NOT LIKE :role3')
@@ -66,6 +67,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->setParameter('role3', '%ROLE_ASSO%')
             ->getQuery()
             ->getResult();
+        }
+            return $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :role')
+            ->andWhere('u.roles NOT LIKE :role2')
+            ->andWhere('u.roles NOT LIKE :role3')
+            ->andWhere('u.roles NOT LIKE :role4')
+            ->setParameter('role', '%ROLE_' . strtoupper($role) . '%')
+            ->setParameter('role2', '%ROLE_ADMIN%')
+            ->setParameter('role3', '%ROLE_ASSO%')
+            ->setParameter('role4', '%ROLE_MEMBRE%')
+            ->getQuery()
+            ->getResult(); 
     }
 
     // /**

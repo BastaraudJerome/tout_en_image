@@ -17,7 +17,7 @@ class UserProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('avatar', AvatarType::class)
+            ->add('avatar', AvatarType::class, ["required"=>false])
             ->add('pseudo')
             ->add('name',)
             ->add('firstname')

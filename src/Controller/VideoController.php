@@ -27,7 +27,7 @@ class VideoController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($video);
             $em->flush();
-            $this->addFlash('success', "Votre photo a bien été enregistré.");
+            $this->addFlash('success', "Votre video a bien été enregistré.");
             return $this->redirectToRoute("video");
         };
         

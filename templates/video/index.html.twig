@@ -18,21 +18,21 @@
                 <video width="160" height="120" controls>
                             <source src="{{ asset('images/videos/' ~ video.videoName ) }}" alt="{{ video.titre }}" type="video/mp4" class="img-list-admin"></video>
             </div>                
-            {% endfor %}
-            {% if is_granted("ROLE_USER") %}
+        {% endfor %}
+            {# {% if is_granted("ROLE_USER") %}
                 <div class="container">
                     {{ form_start(video) }}
                     {{ form_widget(video) }}
                     {{ form_end(video) }}
                 </div>
-            {% endif %}
-        {% else %}
+            {% endif %} #}
+    {% else %}
             <div class="col-12">
                 <h4>
                     Aucune videos 
                 </h4>
             </div>
-        {% endif %}
+    {% endif %}
     </div>
     
 {% endblock %}
