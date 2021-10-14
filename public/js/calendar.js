@@ -94,7 +94,7 @@
  * @param {string} date_event 
  */
   function ajax_get_events(date_event) {
-    console.log("ajax_get_events: ", date_event);
+    //console.log("ajax_get_events: ", date_event);
     var jour = date_event;
     //console.log(jour);
     var dateEvent = new FormData();
@@ -106,24 +106,27 @@
       dataType: "json",
       async: true,
       success: function (dateEvent) {
-        console.log(dateEvent.date);
+        console.log(dateEvent);
 
         
         if (dateEvent.date == jour) {
-          var event_card = $("<div class='event-card'></div>");
-          
+            var event_card = $("<div class='event-card'></div>");
+            
             var event_cours = $(
               "<div class='event-name'>" + dateEvent.cours + ":</div>"
             );
             var event_lieux = $(
-              "<div class='event-count'>" + dateEvent.lieux + ' ' +  dateEvent.horaire + "</div>"
+              "<div class='event-count'>" +
+                dateEvent.lieux +
+                " " +
+                dateEvent.horaire +
+                "</div>"
             );
-            
+
             $(event_card).append(event_cours).append(event_lieux);
             $(".events-container").empty();
             $(".events-container").show(250);
             $(".events-container").append(event_card);
-            
           
         }
         else{

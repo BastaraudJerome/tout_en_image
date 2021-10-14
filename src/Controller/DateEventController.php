@@ -24,7 +24,7 @@ class DateEventController extends AbstractController
       
         if ($request->isXmlHttpRequest()) {  
 
-            $jsonData = array();  
+             
              
             foreach($events as $event) { 
                 $date = $event->getDate()->format('d F Y'); 
@@ -36,18 +36,12 @@ class DateEventController extends AbstractController
                     'date' => $date,  
                     'horaire' => $horaire,  
                 );   
-                $jsonData = $temp;  
+                  
             } 
-            return new JsonResponse($jsonData);
-                //$dateEvent = "Coucou voici ta date";  
+            return new JsonResponse($temp);
+             
 
-            //     if($request->isXmlHttpRequest()) {
-            //         //$dateEvent = $request->request->get('cours');
-            //     $dateEvent = $planningRepository->findAll();
-            //     return new JsonResponse($dateEvent);
-            // }
-
-                return new JsonResponse('il y a');
+                
         }
     }
 }
