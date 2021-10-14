@@ -16,4 +16,10 @@ body{
         background-color: $show;
         color: black;
     }
+    input[type=file]::file-selector-button{
+        border: 1px solid $black;
+        background-color: $ctaColor;
+        color: black;
+        border-radius: 5px;
+    }
 }

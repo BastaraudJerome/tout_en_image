@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PhotoRepository;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -12,7 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=PhotoRepository::class)
  * @Vich\Uploadable
  */
-class Photo
+class Photo implements Serializable
 {
     /**
      * @ORM\Id
@@ -54,6 +55,11 @@ class Photo
      * @ORM\Column(type="string", length=255)
      */
     private $titre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="photoList")
+     */
+    private $users;
 
     public function getId(): ?int
     {
@@ -143,5 +149,28 @@ class Photo
         $this->titre = $titre;
 
         return $this;
+    }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function serialize() {
+
+        $this->imageFile = base64_encode($this->imageFile);
+
+    }
+
+    public function unserialize($data) {
+
+        $this->imageFile = base64_decode($data);
     }
 }

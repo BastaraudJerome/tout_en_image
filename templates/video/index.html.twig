@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Video{% endblock %}
+
+{% block body %}
+{% for label, messages in app.flashes(['success']) %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }} alert-dismissible fade show mt-3" role="alert">
+            {{ message }}
+            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endfor %}
+<div class="row p-3 my-5">
+    {% if videos|length > 0 %}
+        {% for video in videos %}
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3 mb-lg-3 ">
+                <video width="160" height="120" controls>
+                            <source src="{{ asset('images/videos/' ~ video.videoName ) }}" alt="{{ video.titre }}" type="video/mp4" class="img-list-admin"></video>
+            </div>                
+            {% endfor %}
+            {% if is_granted("ROLE_USER") %}
+                <div class="container">
+                    {{ form_start(video) }}
+                    {{ form_widget(video) }}
+                    {{ form_end(video) }}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="col-12">
+                <h4>
+                    Aucune videos 
+                </h4>
+            </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}
+{% block javascripts %}
+    <script>
+            
+            if($('.alert').length>0){               
+                setTimeout(function(){                    
+                    $('.alert').fadeOut(500, function(){$(".alert").remove()});
+                },2000);
+            }
+        </script>
+{% endblock %}
+

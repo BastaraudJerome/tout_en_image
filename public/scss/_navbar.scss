@@ -15,12 +15,7 @@ body {
         
     }
     .nav-link{
-        margin: 0 20px;
-    }
-    .navbar li a:hover{
-        background-color: #f0e195;
-        border-radius: 10px;
-        
+        margin: 0 0px;
     }
     
     .form-control{
@@ -33,7 +28,7 @@ body {
         
 
     }
-    .btn.btn-outline-primary{
+    a.btn.btn-outline-primary{
         background-color: white;
         color: black;
         border-radius: 5px 0px 0px 5px;
@@ -53,6 +48,12 @@ body {
     }
     .img-list{
         max-width: 100px;
+    }
+    .img{
+        max-width: 150px;
+    }
+    .avatar{
+        border-radius: 50%;
     }
 }
 
@@ -121,6 +122,7 @@ body {
             
             
         }
+        
     }
 }
 

@@ -1,48 +1,71 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-admin.html.twig' %}
 
-{% block title %}Video index{% endblock %}
+{% block title %}
+    Video index
+{% endblock %}
 
 {% block body %}
-    <h1>Mes Videos</h1>
-        <a class="btn btn-primary" href="{{ path('admin_video_new') }}">Nouveau</a>
+    <h1>
+        Mes Videos
+    </h1>
+    <a class="btn btn-primary" href="{{ path('admin_video_new') }}">
+        Nouveau
+    </a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Categorie</th>
-                <th>actions</th>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Categorie
+                </th>
+                <th>
+                    actions
+                </th>
             </tr>
         </thead>
         <tbody>
-        {% for video in videos %}
-            <tr>
-                <td><video width="320" height="240" controls>
-                        <source src="{{ asset('image/video/' ~ video.videoName ) }}" alt="{{ video.titre }}" type="video/mp4" class="img-list-admin">
-                    </video></td>
-                <td>{{ video.titre }}</td>
-                <td>{{ video.description }}</td>
-                <td>{{ video.categorie }}</td>
-                <td>
-<a href="{{ path('admin_video_show', {'id': video.id}) }}">
-    <i class="fa fa-eye btn btn-primary-show" aria-hidden="true"></i>
-</a>
+            {% for video in videos %}
+                <tr>
+                    <td>
+                        <video width="320" height="240" controls>
+                            <source src="{{ asset('images/videos/' ~ video.videoName ) }}" alt="{{ video.titre }}" type="video/mp4" class="img-list-admin"></video>
+                        </td>
+                        <td>
+                            {{ video.titre }}
+                        </td>
+                        <td>
+                            {{ video.description }}
+                        </td>
+                        <td>
+                            {{ video.categorie }}
+                        </td>
+                        <td>
+                            <a href="{{ path('admin_video_show', {'id': video.id}) }}">
+                                <i class="fa fa-eye btn btn-primary-show" aria-hidden="true"></i>
+                            </a>
 
-<a href="{{ path('admin_video_edit', {'id': video.id}) }}">
-<i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
+                            <a href="{{ path('admin_video_edit', {'id': video.id}) }}">
+                                <i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
 
-</a>
+                            </a>
 
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Aucune Video </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">
+                            Aucune Video 
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
+    {% endblock %}
     
-{% endblock %}

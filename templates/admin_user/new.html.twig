@@ -1,0 +1,12 @@
+{% extends 'base-admin.html.twig' %}
+
+
+{% block title %}Nouveau Utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Nouveau Utilisateur</h1>
+
+    {{ include('admin_user/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('admin_user_index', {'role': role}) }}">Retour</a>
+{% endblock %}

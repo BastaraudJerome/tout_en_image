@@ -4,14 +4,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VideoRepository;
+use Serializable;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=VideoRepository::class)
  * @Vich\Uploadable
  */
-class Video
+class Video implements Serializable
 {
     /**
      * @ORM\Id
@@ -19,6 +20,7 @@ class Video
      * @ORM\Column(type="integer")
      */
     private $id;
+
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -49,15 +51,22 @@ class Video
      */
     private $updatedAt;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $categorie;
+    
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $titre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="videoList")
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="videos")
+     */
+    private $categorie;
 
     public function getId(): ?int
     {
@@ -137,17 +146,6 @@ class Video
         return $this;
     }
 
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?string $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
 
     public function getTitre(): ?string
     {
@@ -160,4 +158,43 @@ class Video
 
         return $this;
     }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function serialize() {
+
+        $this->imageFile = base64_encode($this->imageFile);
+
+    }
+
+    public function unserialize($data) {
+
+        $this->imageFile = base64_decode($data);
+    }
+
+    public function getCategorie(): ?Category
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Category $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
 }
+
+     
+     
+   

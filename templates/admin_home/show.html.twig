@@ -1,0 +1,36 @@
+{% extends 'base-admin.html.twig' %}
+
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h1>Home</h1>
+        <a class="btn btn-primary" href="{{ path('admin_home_index') }}">Retour</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ home.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ home.titre }}</td>
+            </tr>
+            <tr>
+                <th>SousTitre</th>
+                <td>{{ home.sousTitre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ home.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+
+    <a href="{{ path('admin_home_edit', {'id': home.id}) }}"><i class="fa fa-pencil btn btn-primary-edit my-1" aria-hidden="true"></i></a>
+
+    {{ include('admin_home/_delete_form.html.twig') }}
+{% endblock %}

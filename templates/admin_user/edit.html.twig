@@ -1,0 +1,20 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}
+    Modifier un profil 
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <h1>
+        Modifier un profil 
+        {{ title }}
+    </h1>
+    <a href="{{ path('admin_user_index', { "role": role })}}" class="btn my-2" style="background:#edd34d;border:1px solid black">
+        Retour           
+    </a>
+{{ include('admin_user/_form.html.twig', {'button_label': '<i class="fa fa-floppy-o" aria-hidden="true"></i>'}) | raw }}
+
+    {{ include('admin_user/_delete_form.html.twig') }}
+{% endblock %}
+

@@ -1,43 +1,62 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-admin.html.twig' %}
 
-{% block title %}Photo index{% endblock %}
+{% block title %}
+    Photos
+{% endblock %}
 
 {% block body %}
-    <h1>Mes Photos</h1>
-<a class="btn btn-primary" href="{{ path('admin_photo_new') }}">Nouveau</a>
+    <h1>
+        Mes Photos
+    </h1>
+    <a class="btn btn-primary" href="{{ path('admin_photo_new') }}">
+        Nouveau
+    </a>
     <table class="table">
         <thead>
             <tr>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>actions</th>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    actions
+                </th>
             </tr>
         </thead>
         <tbody>
-        {% for photo in photos %}
-            <tr>
-                
-                <td><img src="{{ asset('image/photos/' ~ photo.imageName) }}" alt="{{ photo.titre }}" class="img-list"></td>
-                <td>{{ photo.titre }}</td>
-                <td>{{ photo.description }}</td> 
-                <td>
-<a href="{{ path('admin_photo_show', {'id': photo.id}) }}">
-    <i class="fa fa-eye btn btn-primary-show" aria-hidden="true"></i>
-</a>
+            {% for photo in photos %}
+                <tr>
 
-<a href="{{ path('admin_photo_edit', {'id': photo.id}) }}">
-    <i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
-</a>
+                    <td>
+                        <img src="{{ asset('images/photos/' ~ photo.imageName) }}" alt="{{ photo.titre }}" class="img-list"></td>
+                        <td>
+                            {{ photo.titre }}
+                        </td>
+                        <td>
+                            {{ photo.description }}
+                        </td>
+                        <td>
+                            <a href="{{ path('admin_photo_show', {'id': photo.id}) }}">
+                                <i class="fa fa-eye btn btn-primary-show" aria-hidden="true"></i>
+                            </a>
 
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Aucune Photo</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                            <a href="{{ path('admin_photo_edit', {'id': photo.id}) }}">
+                                <i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
+                            </a>
 
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">
+                            Aucune Photo
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% endblock %}
     
-{% endblock %}

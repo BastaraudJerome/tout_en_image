@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photos{% endblock %}
+
+{% block body %}
+{% for label, messages in app.flashes(['success']) %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }} alert-dismissible fade show mt-3" role="alert">
+            {{ message }}
+            <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endfor %}
+    <div class="row p-3 my-5">
+        {% if photos|length > 0 %}
+            {% for photo in photos %}
+                <div class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3 mb-lg-3 ">
+                    <img src="{{ asset('images/photos/' ~ photo.imageName ) }}" alt="{{ photo.titre }}" class="img">
+                </div> 
+            {% endfor %}
+            {% if is_granted("ROLE_USER") %}               
+                        <div class="container">
+                            {{form_start(photo)}}
+                                {{form_widget(photo)}}
+                            {{form_end(photo)}}
+                        </div>              
+                {% endif %}
+        {% else %}
+            <div class="col-12">
+                <h4>Aucune photos </h4>         
+            </div>           
+        {% endif %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+            
+            if($('.alert').length>0){               
+                setTimeout(function(){                    
+                    $('.alert').fadeOut(500, function(){$(".alert").remove()});
+                },2000);
+            }
+        </script>
+{% endblock %}
+

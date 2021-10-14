@@ -1,0 +1,11 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Nouveau Planning{% endblock %}
+
+{% block body %}
+    <h1>Nouveau Planning</h1>
+
+    {{ include('admin_planning/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('admin_planning_index') }}">Retour</a>
+{% endblock %}

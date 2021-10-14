@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('admin_user_delete', {'id': user.id, 'role': role}) }}" onsubmit="return confirm('Merci de confirmer la suppresion.');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+<button class="btn btn-primary-del">
+    <i class="fa fa-trash" aria-hidden="true"></i>
+</button>
+
+</form>

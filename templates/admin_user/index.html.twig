@@ -1,0 +1,55 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des {{ title }}</h1>
+<a class="btn btn-primary" href="{{ path('admin_user_new', {'role': role}) }}">
+    
+    Nouveau
+        
+</a>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% if "ROLE_ADMIN" in user.roles %}
+                    Administrateur
+                    {% elseif "ROLE_ASSO" in user.roles %}
+                    Association
+                    {% elseif "ROLE_USER" in user.roles %}
+                    Utilisateur
+                    {% endif %}</td>
+                <td>
+<a href="{{ path('admin_user_show', {'id': user.id, 'role': role}) }}">
+    
+    <i class="fa fa-eye btn btn-primary-show" aria-hidden="true"></i>
+</a>
+
+<a href="{{ path('admin_user_edit', {'id': user.id, 'role':role}) }}">
+    <i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
+</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune Données</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

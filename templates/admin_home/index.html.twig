@@ -1,0 +1,48 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}HomePage{% endblock %}
+
+{% block body %}
+    <h1>HomePages</h1>
+<a class="btn btn-primary" href="{{ path('admin_home_new') }}">
+    Nouveau
+</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>SousTitre</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for home in homes %}
+            <tr>
+                <td>{{ home.id }}</td>
+                <td>{{ home.titre }}</td>
+                <td>{{ home.sousTitre }}</td>
+                <td class="col-md-4">{{ home.description }}</td>
+                <td>
+                <a href="{{ path('admin_home_show', {'id': home.id}) }}">
+                    <i class="fa fa-eye btn btn-primary-show" aria-hidden="true"></i>
+                </a>
+
+                <a href="{{ path('admin_home_edit', {'id': home.id}) }}">
+                    <i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
+                </a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune Données</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

@@ -4,4 +4,119 @@
 
 {% block body %}
 
+<div class="relative">    
+    
+    <!-- Carousel Photo -->
+        {% if photos|length > 0 %}
+            <div id="monCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                        {% for photo in photos %}
+                        <div class="carousel-caption titre">
+                                <div class="text-center text-light">
+                                        {% if homeContent.titre is defined and homeContent.titre is not null %}
+                                        <h1 class="display-1 fw-bolder">
+                                            {{ homeContent.titre }}
+                                        </h1>
+                                    {% endif %}
+                                    <p class="lead fw-normal text-white-50">
+                                        {% if homeContent.soustitre is defined and homeContent.sousTitre is not null %}
+                                            {{ homeContent.sousTitre }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                        </div>
+                            <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                                <a href="{{ path('photo') }}">
+                                    <img src="{{ asset('images/photos/' ~ photo.imageName ) }}" class="d-block w-100" alt="{{ photo.titre }}" />
+                                </a>
+                                <div class="carousel-caption">
+                                    <h1 class="titre-carousel">{{ photo.titre }}</h1>
+                                    <h3 class="titre-carousel">{{photo.description}}</h3>
+                                </div>
+                            </div>      
+                        {% endfor %}
+                </div>
+                
+                <div class="carousel-indicators">
+                    <button
+                    type="button"
+                    data-bs-target="#monCarousel"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                    >
+                    </button>
+                    <button
+                    type="button"
+                    data-bs-target="#monCarousel"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                    >
+                    </button>
+                    <button
+                    type="button"
+                    data-bs-target="#monCarousel"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                    >
+                    </button>
+                    <button
+                    type="button"
+                    data-bs-target="#monCarousel"
+                    data-bs-slide-to="3"
+                    aria-label="Slide 4"
+                    >
+                    </button>
+                </div>
+                <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#monCarousel"
+                    data-bs-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#monCarousel"
+                    data-bs-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        {% endif %}
+        <!-- Fin carousel photo -->
+</div>  
+
+    {% if videos|length > 0 %}
+    
+        <div class="row p-3">
+            <div class="col-12 py-2 col-md-3 col-lg-12">
+            <h2>Nos dernières videos </h2>   
+                {% for video in videos %}
+                        <video width="320" height="240" controls>       
+                            <source src="{{ asset('images/videos/' ~ video.videoName ) }}" alt="{{ video.titre }}" type="video/mp4" class="img">
+                            {{video.titre}}    
+                        </video>
+                        
+                {% endfor %}
+                
+            </div>        
+        </div>
+   
+
+    {% else %}
+        <div class="col-12">
+            <h4>
+                Aucune photos 
+            </h4>
+        </div>
+    {% endif %}
+        
+    
+
 {% endblock %}

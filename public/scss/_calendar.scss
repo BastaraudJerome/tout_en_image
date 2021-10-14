@@ -1,0 +1,376 @@
+@import '_variables.scss';
+
+body{
+
+    .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left:auto
+}
+
+
+    .calendar-container {
+    position: relative;
+    margin: 0 auto;
+    height: 500px;
+    width: 400px;
+    background:$white;
+    font: 13px Helvetica, Arial, san-serif;
+    display:block;
+    padding: 20px;
+    float:left;
+    border: 1px solid black;
+    border-radius: 4px;
+
+}
+
+@media (max-width: 991.98px) {
+    .calendar-container {
+        padding:0
+    }
+}
+
+@media (max-width: 767.98px) {
+    .calendar-container {
+        padding: 0;
+        width:100%
+    }
+}
+
+.calendar-container:after {
+    clear:both
+}
+
+.calendar {
+    width: 100%;
+    padding:0
+}
+
+.year-header {
+    background: $white ;
+    height: 40px;
+    text-align: center;
+    position: relative;
+    color: $white;
+    border-top-left-radius: 3px;
+    margin-top:20px
+}
+
+.year-header span {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 40px;
+    color:$black
+}
+
+.left-button, .right-button {
+    cursor: pointer;
+    width: 28px;
+    text-align: center;
+    position: absolute;
+    color: #000 !important;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    font-size:14px !important
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .left-button, .right-button {
+        -webkit-transition: none;
+        -o-transition: none;
+        transition:none
+    }
+}
+
+.left-button:hover, .right-button:hover {
+    color:#f8eebe !important
+}
+
+.left-button {
+    left:0
+}
+
+.right-button {
+    right: 0;
+    top:0
+}
+
+.button {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    font-size: 1rem;
+    border-radius: 25px;
+    padding: .65rem 1.9rem;
+    -webkit-transition: .2s ease all;
+    -o-transition: .2s ease all;
+    transition: .2s ease all;
+    //color: $white;
+    border: 1px solid $black;
+    background:#edd34d !important
+}
+
+.button.button-white {
+    background: $white;
+    color:$black
+}
+
+.button:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline:none
+}
+
+#cancel-button {
+    background:$black
+}
+
+#add-button {
+    display: block;
+    position: absolute;
+    right: 20px;
+    bottom:20px
+}
+
+#add-button:hover, #ok-button:hover, #cancel-button:hover {
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    transform:scale(1.03)
+}
+
+#add-button:active, #ok-button:active, #cancel-button:active {
+    -webkit-transform: translateY(3px) scale(.97);
+    -ms-transform: translateY(3px) scale(.97);
+    transform:translateY(3px) scale(.97)
+}
+
+.days-table, .dates-table, .months-table {
+    border-collapse: separate;
+    text-align:center
+}
+
+.day {
+    height: 26px;
+    width: 26px;
+    padding: 0 10px;
+    line-height: 26px;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    font-size: 10px;
+    color:$black
+}
+
+.month {
+    cursor: default;
+    height: 26px;
+    width: 26px;
+    padding: 0 2px;
+    padding-top: 10px;
+    line-height: 26px;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #ccc;
+    -webkit-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition:all 250ms
+}
+
+@media (max-width: 991.98px) {
+    .month {
+        font-size:8px
+    }
+}
+
+@media (max-width: 767.98px) {
+    .month {
+        font-size:10.5px
+    }
+}
+
+.active-month {
+    font-weight: 700;
+    color:#edd34d
+}
+
+.month:hover {
+    color:#edd34d
+}
+
+.table-date {
+    cursor: default;
+    color: #2b2b2b;
+    height: 26px;
+    width: 26px;
+    font-size: 15px;
+    padding: 10px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    -webkit-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition: all 250ms;
+    position: relative;
+    z-index:0
+}
+
+.table-date:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    content: '';
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index:-1
+}
+
+.event-date {
+    border-color: #edd34d;
+    background: #edd34d;
+    color:$white
+}
+
+.event-date:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    content: '';
+    background: #ffc107;
+    border:1px solid $black
+}
+
+.active-date {
+    color:$black;
+}
+
+.active-date:before {
+    background:#edd34d
+}
+
+.event-date.active-date {
+    background: transparent;
+    border:none
+}
+
+.dialog {
+    z-index: 5;
+    background: #edd34d;
+    //position: absolute;
+    width: 400px;
+    height: 500px;
+    //bottom: 0;
+    //left: 0;
+    display:none;
+    float:left;
+    border-radius: 4px;
+    border: 1px solid $black;
+}
+
+@media (max-width: 767.98px) {
+    .dialog {
+        width:100%
+    }
+}
+
+.dialog-header {
+    margin: 20px;
+    margin-top: 30px;
+    color: $black;
+    text-align: center;
+    font-size:28px
+}
+
+.form-container {
+    margin-top:20%
+}
+
+.form-label {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color:$black
+}
+
+.input {
+    border: 1px solid $black;
+    background: $white;
+    border: 1px $black solid;
+    display: block;
+    margin-bottom: 30px;
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    -webkit-transition: border-color 250ms;
+    -o-transition: border-color 250ms;
+    transition: border-color 250ms;
+    border-radius: 40px;
+    color:$black
+}
+
+.input:focus {
+    outline: none;
+    border-color:$black
+}
+
+.error-input {
+    border-color: #edd34d
+}
+
+.event-card {
+    padding: 20px 0;
+    width: 400px;
+    height: 500px;
+    display: block;
+    background: #edd34d !important;
+    border: 1px solid $black !important;
+    margin: 20px;
+    color: $white;
+    margin-left: 12px;
+    border-radius: 4px;
+    margin:0;
+    float:left;
+    
+}
+
+.event-count, .event-cancelled {
+    display: inline;
+    padding: 0 10px;
+    font-size:1rem
+}
+
+.event-count {
+    color: $black;
+
+}
+
+.event-name {
+    
+    text-align:center;
+    color:$black;
+     
+}
+
+.event-cancelled {
+    color: $black;
+    //text-align:center
+}
+
+
+
+
+}

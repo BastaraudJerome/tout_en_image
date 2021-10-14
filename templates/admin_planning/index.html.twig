@@ -1,0 +1,41 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Planning index{% endblock %}
+
+{% block body %}
+    <h1>Mon Planning</h1>
+    <a class="btn btn-primary" href="{{ path('admin_planning_new') }}">Nouveau</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Membres</th>
+                <th>Cours</th>
+                <th>Date</th>
+                <th>Horaire</th>
+                <th>Lieux</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for planning in plannings %}
+            <tr>
+                <td>{{ planning.user }}</td>
+                <td>{{ planning.cours }}</td>
+                <td>{{ planning.date ? planning.date|date("d-m-Y")}}</td>
+                <td>{{ planning.horaire ? planning.horaire|date('H:i:s') : '' }}</td>
+                <td>{{ planning.lieux }}</td>
+                <td>
+                    <a href="{{ path('admin_planning_show', {'id': planning.id}) }}"><i class="fa fa-eye btn btn-primary-show" aria-hidden="true"></i></a>
+                    <a href="{{ path('admin_planning_edit', {'id': planning.id}) }}"><i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

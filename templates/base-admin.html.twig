@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}
+                Tout En Image
+            {% endblock %}
+        </title>
+        <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://bootswatch.com/5/sandstone/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/admin.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        {# <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script> #}
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body class="sb-nav-fixed">
+        
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="#">Tableau de Bord</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fa fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="ms-3 text-dark" href="{{ path('app_logout') }}">Deconnexion</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="{{ path('admin_dashboard') }}">
+                                <div class="sb-nav-link-icon"><i class="fa fa-tachometer"></i></div>
+                                Dashboard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fa fa-desktop"></i></div>
+                                Pages
+                                <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Authentication
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                                            <a class="nav-link" href="#">Mdp oublié</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseMemb" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Membres
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseMemb" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ path('admin_user_index', {role:'admin'}) }}">Administrateurs</a>
+                                            <a class="nav-link" href="{{ path('admin_user_index', {role:'asso'}) }}">Associations</a>
+                                            <a class="nav-link" href="{{ path('admin_user_index', {role:'user'}) }}">Membres</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseEdit" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Editer
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseEdit" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="{{ path('admin_home_index') }}">HomePage</a>
+                                            <a class="nav-link" href="{{ path('admin_photo_index') }}">Photos</a>
+                                            <a class="nav-link" href="{{ path('admin_video_index') }}">Videos</a>
+                                            <a class="nav-link" href="#">Oeuvres</a>
+                                            <a class="nav-link" href="{{ path('admin_planning_index') }}">Planning</a>
+                                            <a class="nav-link" href="#">Agenda</a>
+                                            <a class="nav-link" href="#">Equipes</a>
+                                            <a class="nav-link" href="{{ path('admin_category_index') }}">Category</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Error
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fa fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="#">401 Page</a>
+                                            <a class="nav-link" href="#">403 Page</a>
+                                            <a class="nav-link" href="#">404 Page</a>
+                                            <a class="nav-link" href="#">500 Page</a>
+                                        </nav>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Connecté entant que:</div>
+                        {% if app.user.pseudo is defined and app.user.pseudo is not null %}
+                        {{ app.user.pseudo  }}
+                        <img src="{{asset('images/avatars/' ~ app.user.avatar)}}" alt="{{ app.user.avatar }}" class="avatar">                                
+                        {% elseif app.user.firstname is defined and app.user.firstname is not null %}
+                        {{ app.user.firstname }}
+                        <img src="{{asset('images/avatars/' ~ app.user.avatar)}}" alt="{{ app.user.avatar }}" class="avatar">
+                        {% else %}
+                        {{ app.user.email }}
+                        <img src="{{asset('images/avatars/' ~ app.user.avatar)}}" alt="{{ app.user.avatar }}" class="avatar">
+                        {% endif %}
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Dashboard</h1>
+                    </div>
+                    <div class="continer-fluid mx-3">
+                    {% block body %}{% endblock %}
+                    </div>
+                </main> 
+                {# FOOTER #}
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                {# FIN FOOTER #}
+            </div>
+        </div>
+       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="{{asset("js/datatables-simple-demo.js")}}"></script>
+        <script src="{{asset("js/scripts.js")}}"></script>
+        
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

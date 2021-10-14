@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-admin.html.twig' %}
+
 
 {% block title %}Photo{% endblock %}
 
@@ -13,7 +14,7 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td><img src="{{ asset('image/photos/' ~ photo.imageName) }}" alt="{{ photo.titre }}" class="img-list"></td>
+                <td><img src="{{ asset('images/photos/' ~ photo.imageName) }}" alt="{{ photo.titre }}" class="img-list"></td>
             </tr>
             <tr>
                 <th>Titre</th>

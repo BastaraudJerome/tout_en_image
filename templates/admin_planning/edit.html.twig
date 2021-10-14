@@ -1,0 +1,17 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Edit Planning{% endblock %}
+
+{% block body %}
+    <h1>Edit Planning</h1>
+<a href="{{ path('admin_planning_index') }}" class="btn my-2" style="background:#edd34d;border:1px solid black">
+    Retour
+</a>
+
+{{ include('admin_planning/_form.html.twig', {'button_label': '<i class="fa fa-floppy-o" aria-hidden="true"></i>'}) | raw }}
+
+
+    
+
+    {{ include('admin_planning/_delete_form.html.twig') }}
+{% endblock %}

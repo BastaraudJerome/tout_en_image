@@ -1,0 +1,34 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Planning{% endblock %}
+
+{% block body %}
+    <h1>Planning</h1>
+    <a href="{{ path('admin_planning_index') }}">back to list</a>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ planning.id }}</td>
+            </tr>
+            <tr>
+                <th>Cours</th>
+                <td>{{ planning.cours }}</td>
+            </tr>
+            <tr>
+                <th>Horaire</th>
+                <td>{{ planning.horaire ? planning.horaire|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Lieux</th>
+                <td>{{ planning.lieux }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+
+    <a href="{{ path('admin_planning_edit', {'id': planning.id}) }}">edit</a>
+
+    {{ include('admin_planning/_delete_form.html.twig') }}
+{% endblock %}
