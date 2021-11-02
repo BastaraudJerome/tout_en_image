@@ -106,43 +106,45 @@
       dataType: "json",
       async: true,
       success: function (dateEvent) {
-        console.log(dateEvent);
+        //console.log(dateEvent);
+        var events = [];
+        for (var i = 0; i < dateEvent.length; i++){
+          var event = dateEvent[i];
+         
+            if (event["date"] === jour) {
+              
+              console.log(event);
+              
+              var event_card = $("<div class='event-card'></div>");
+              var event_cours = $(
+                "<div class='event-name'>" + dateEvent[i].cours + ":</div>"
+              );
+              var event_lieux = $(
+                "<div class='event-count'>" +
+                  dateEvent[i].lieux +
+                  " " +
+                  dateEvent[i].horaire +
+                  "</div>"
+              );
+              
+              $(event_card).append(event_cours).append(event_lieux);
+              $(".events-container").empty();
+              $(".events-container").show(250);
+              $(".events-container").append(event_card);
+            } else {
+              var event_card = $("<div class='event-card'></div>");
+              var event_name = $(
+                "<div class='event-name p-1'>Aucun évenement prévu pour le " +
+                  jour +
+                  ".</div>"
+              );
+              $(event_card).css({ "border-left": "10px solid #edd34d" });
+              $(event_card).append(event_name);
+              $(".events-container").empty();
+              $(".events-container").append(event_card);
+            }
 
-        
-        if (dateEvent.date == jour) {
-            var event_card = $("<div class='event-card'></div>");
-            
-            var event_cours = $(
-              "<div class='event-name'>" + dateEvent.cours + ":</div>"
-            );
-            var event_lieux = $(
-              "<div class='event-count'>" +
-                dateEvent.lieux +
-                " " +
-                dateEvent.horaire +
-                "</div>"
-            );
-
-            $(event_card).append(event_cours).append(event_lieux);
-            $(".events-container").empty();
-            $(".events-container").show(250);
-            $(".events-container").append(event_card);
-          
-        }
-        else{
-          
-          var event_card = $("<div class='event-card'></div>");
-          var event_name = $(
-            "<div class='event-name p-1'>Aucun évenement prévu pour le " +
-              jour +
-              ".</div>"
-          );
-          $(event_card).css({ "border-left": "10px solid #edd34d" });
-          $(event_card).append(event_name);
-          $(".events-container").empty();
-          $(".events-container").append(event_card);
-     
-        }
+        } 
       },
       error: function (xhr, textStatus, errorThrown) {
         alert("Ajax request failed.");
@@ -229,18 +231,18 @@
   }
 
   // Adds a json event to event_data
-  function new_event_json(name, count, date, day) {
-    var event = {
-      occasion: name,
-      invited_count: count,
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      day: day,
-      date: date,
+  // function new_event_json(name, count, date, day) {
+  //   var event = {
+  //     occasion: name,
+  //     invited_count: count,
+  //     year: date.getFullYear(),
+  //     month: date.getMonth() + 1,
+  //     day: day,
+  //     date: date,
       
-    };
-    event_data["events"].push(event);
-  }
+  //   };
+  //   event_data["events"].push(event);
+  // }
 
   // Display all events of the selected date in card views
   // function show_events(events, month, day) {

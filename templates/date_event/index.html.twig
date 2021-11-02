@@ -9,12 +9,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/XAMPP/xamppfiles/htdocs/tout_en_image/src/Controller/DateEventController.php'|file_link(0) }}">src/Controller/DateEventController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/XAMPP/xamppfiles/htdocs/tout_en_image/templates/date_event/index.html.twig'|file_link(0) }}">templates/date_event/index.html.twig</a></code></li>
-    </ul>
+    {% for ev in event %}
+    {{dump(ev) }}
+    {% endfor %}
 </div>
 {% endblock %}
