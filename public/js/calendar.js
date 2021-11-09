@@ -108,12 +108,14 @@
       success: function (dateEvent) {
         //console.log(dateEvent);
         var events = [];
+        
         for (var i = 0; i < dateEvent.length; i++){
           var event = dateEvent[i];
-         
+         //console.log(dateEvent[i]);
             if (event["date"] === jour) {
               
               console.log(event);
+              console.log(jour);
               
               var event_card = $("<div class='event-card'></div>");
               var event_cours = $(
@@ -132,6 +134,7 @@
               $(".events-container").show(250);
               $(".events-container").append(event_card);
             } else {
+              console.log("test");
               var event_card = $("<div class='event-card'></div>");
               var event_name = $(
                 "<div class='event-name p-1'>Aucun évenement prévu pour le " +

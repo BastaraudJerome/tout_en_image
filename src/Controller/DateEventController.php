@@ -24,7 +24,7 @@ class DateEventController extends AbstractController
           //$temp = [];               
         
 
-                
+                //faire l'inverse avec un selecte par date
 
                 $temp = [];
                 foreach ($events as $event) {

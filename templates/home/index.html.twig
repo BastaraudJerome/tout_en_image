@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="relative">    
+    
     
     <!-- Carousel Photo -->
         {% if photos|length > 0 %}
@@ -27,7 +27,7 @@
                         </div>
                             <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
                                 <a href="{{ path('photo') }}">
-                                    <img src="{{ asset('images/photos/' ~ photo.imageName ) }}" class="d-block w-100" alt="{{ photo.titre }}" />
+                                    <img src="{{ asset('images/photos/' ~ photo.imageName ) }}" class="d-block w-100" style="height:600px;width:600px" alt="{{ photo.titre }}" />
                                 </a>
                                 <div class="carousel-caption">
                                     <h1 class="titre-carousel">{{ photo.titre }}</h1>
@@ -90,7 +90,7 @@
             </div>
         {% endif %}
         <!-- Fin carousel photo -->
-</div>  
+  
 
     {% if videos|length > 0 %}
     
@@ -112,7 +112,7 @@
     {% else %}
         <div class="col-12">
             <h4>
-                Aucune photos 
+                Aucune video 
             </h4>
         </div>
     {% endif %}
