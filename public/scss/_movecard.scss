@@ -1,0 +1,8 @@
+.move{
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.move:hover{
+    transform: scale(1.1);
+}

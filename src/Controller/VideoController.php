@@ -3,13 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Video;
+use App\Entity\Comments;
+use App\Form\CommentsType;
 use App\Form\UserVideoType;
-use App\Repository\CategoryRepository;
 use App\Repository\VideoRepository;
+use App\Repository\CategoryRepository;
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class VideoController extends AbstractController
 {
@@ -54,6 +58,58 @@ class VideoController extends AbstractController
 
         return new Response('ok');
 
+    }
+    /**
+     * 
+     *@Route("/video/videocomments/{id}", name="VideoComments") 
+     */
+    public function videoComments(Request $request, VideoRepository $videoRepository, int $id)
+    {
+        $video = $videoRepository->findOneBy(['id' =>$id]);
+        if (!$video){
+            throw new NotFoundHttpException('Pas de question trouvée');
+        }
+        
+
+        //partie commentaire
+        //on crée le commentaire vierge
+        $comment = new Comments;
+
+        // on génère le formulaire
+        $form = $this->createForm(CommentsType::class, $comment);
+
+        $form->handleRequest($request);
+
+        //traitement du formulaire
+        if($form->isSubmitted() && $form->isValid()){
+            $comment->setCreatedAt(new DateTimeImmutable());
+            $comment->setVideos($video);
+
+            // on récupere le contenus du champ parentid
+            $parentid = $form->get("parentid")->getData();
+
+            // on va chercher le commentaire correspondant
+            $em = $this->getDoctrine()->getManager();
+
+            if($parentid != null ){
+                $parent = $em->getRepository(Comments::class)->find($parentid);
+            }
+            
+
+            //on définit le parent
+            $comment->setParent($parent ?? null );
+
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre commentaire a bien été envoyé');
+            return $this->redirectToRoute('VideoComments', ['id' => $id]);
+        }
+
+        return $this->render('video/video-comments.html.twig', [
+            'videos' => $videoRepository->find($id), 
+            'form' => $form->createView(),
+        ]);
     }
     /**
      * 

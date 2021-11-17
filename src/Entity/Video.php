@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VideoRepository;
 use Serializable;
@@ -67,6 +69,16 @@ class Video implements Serializable
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="videos")
      */
     private $categorie;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="videos", orphanRemoval=true)
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -190,6 +202,36 @@ class Video implements Serializable
     public function setCategorie(?Category $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setVideos($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getVideos() === $this) {
+                $comment->setVideos(null);
+            }
+        }
 
         return $this;
     }

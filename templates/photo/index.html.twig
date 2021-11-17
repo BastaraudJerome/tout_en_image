@@ -11,26 +11,38 @@
         </div>
     {% endfor %}
 {% endfor %}
-    <div class="row p-3 my-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 g-0 m-5">
         {% if photos|length > 0 %}
             {% for photo in photos %}
-                <div class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3 mb-lg-3 ">
-                    <img src="{{ asset('images/photos/' ~ photo.imageName ) }}" alt="{{ photo.titre }}" class="img">
-                </div> 
+                <div class="card m-3 move" style="width: 20rem;">
+                    <a href="{{path('PhotoComments',{'id': photo.id})}}">
+                        <img src="{{ asset('images/photos/' ~ photo.imageName ) }}" alt="{{ photo.titre }}" class="card-img-top">
+                    </a>  
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <strong>
+                                Titre : 
+                            </strong>
+                            {{ photo.titre }}
+                        </h5>
+                        <div class="card-text">
+                            <strong>
+                                Description :
+                            </strong>
+                            {{ photo.description }}
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
-            {# {% if is_granted("ROLE_USER") %}               
-                        <div class="container">
-                            {{form_start(photo)}}
-                                {{form_widget(photo)}}
-                            {{form_end(photo)}}
-                        </div>              
-                {% endif %} #}
         {% else %}
             <div class="col-12">
                 <h4>Aucune photos </h4>         
             </div>           
         {% endif %}
     </div>
+    </div>
+    
 {% endblock %}
 {% block javascripts %}
     <script>
