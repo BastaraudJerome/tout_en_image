@@ -6,9 +6,11 @@ use App\Entity\User;
 use App\Entity\Photo;
 use DateTimeImmutable;
 use App\Entity\Comments;
+use App\Entity\PostLike;
 use App\Form\CommentsType;
 use App\Form\UserPhotoType;
 use App\Repository\PhotoRepository;
+use App\Repository\PostLikeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -127,5 +129,53 @@ class PhotoController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('profile');
-    } 
+    }
+    /**
+     * Permet de like ou unliker une photo
+     * 
+     * @Route("/photo/{id}/like", name="photo_like")
+     *
+     * @param Photo $photo
+     * @param PostLikeRepository $postLikeRepository
+     * @return Response
+     */
+    public function like(Photo $photo, PostLikeRepository $postLikeRepository): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) return $this->json([
+            'code' => 403,
+            'message' => "Vous n'êtes pas autorisé"
+        ], 403);
+
+        if ($photo->isLikedByUser($user)) {
+            $like = $postLikeRepository->findOneBy([
+                'post' => $photo,
+                'user' => $user
+            ]);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Like bien supprimé',
+                'likes' => $postLikeRepository->count(['post' => $photo])
+            ], 200);
+        }
+
+        $like = new PostLike();
+        $like->setPost($photo)
+            ->setUser($user);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'Like bien ajouté',
+            'likes' => $postLikeRepository->count(['post' => $photo])
+        ], 200);
+    }
 }

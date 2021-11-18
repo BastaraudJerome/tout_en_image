@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Video;
 use App\Entity\Comments;
+use App\Entity\PostLike;
 use App\Form\CommentsType;
 use App\Form\UserVideoType;
 use App\Repository\VideoRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\PostLikeRepository;
 use DateTimeImmutable;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -127,4 +130,54 @@ class VideoController extends AbstractController
 
         return $this->redirectToRoute('profile');
     } 
+    /**
+     * Permet de like ou unliker une video
+     *
+     * @Route("/video/{id}/like", name="video_like")
+     * 
+     * @param Video $video
+     * @param ObjectManager $manager
+     * @param PostLikeRepository $postLikeRepository
+     * @return Response
+     */
+    public function like(Video $video, PostLikeRepository $postLikeRepository) : Response
+    {
+        $user = $this->getUser();
+
+        if(!$user) return $this->json([
+            'code' => 403,
+            'message' => "Vous n'êtes pas autorisé"
+        ],403);
+
+        if($video->isLikedByUser($user)){
+            $like = $postLikeRepository->findOneBy([
+                'videoLike'=> $video,
+                'user' => $user
+            ]);
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message'=> 'Like bien supprimé',
+                'likes' => $postLikeRepository->count(['videoLike'=> $video])
+            ], 200);
+        }
+
+        $like = new PostLike();
+        $like->setVideoLike($video)
+             ->setUser($user);
+
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json([
+            'code'=> 200, 
+            'message'=> 'Like bien ajouté',
+            'likes' => $postLikeRepository->count(['videoLike' => $video])
+        ], 200);
+
+    }
 }

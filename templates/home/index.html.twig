@@ -75,8 +75,8 @@
                     data-bs-target="#monCarousel"
                     data-bs-slide="prev"
                 >
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                    <i class="carousel-control-prev-icon" aria-hidden="true"></i>
+                    <i class="visually-hidden">Previous</i>
                 </button>
                 <button
                     class="carousel-control-next"
@@ -84,8 +84,8 @@
                     data-bs-target="#monCarousel"
                     data-bs-slide="next"
                 >
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                    <i class="carousel-control-next-icon" aria-hidden="true"></i>
+                    <i class="visually-hidden">Next</i>
                 </button>
             </div>
         {% endif %}
@@ -115,9 +115,18 @@
                             <strong>Genre : </strong>
                             {{ video.categorie }}
                         </div>
-                        {% if app.user and video not in app.user.videoList %}
-                            <button data-videoid="{{video.id}}" class="btn btn-sm btn-warning absolute text-dark bt-favoris" style="max-width:35px"><i class="fa fa-star" aria-hidden="true"></i></button>
-                        {% endif %}                                    
+                        
+                        <a href="{{path("video_like",{'id': video.id})}}"class="btn btn-link js-like">
+                        {% if app.user and video.isLikedByUser(app.user) %}
+                            <i class="fa fa-thumbs-up in" ></i>
+                        {% else %}
+                            <i class="fa fa-thumbs-o-up in"></i>
+                        {% endif %}
+                            <span class="js-likes">{{video.likes | length}}</span>
+                            <span class="js-label">J'aime</span>
+                        </a>
+                                           
+                                                            
                     </div>
                 {% endfor %}
             </div>        
@@ -129,7 +138,42 @@
                 </h4>
             </div>
         {% endif %}
-        
+{% endblock %}
+{% block javascripts %}
     
+    <script>
+
+        function onClickBtnLike(event){
+        event.preventDefault();
+
+        const url = this.href;
+        const spanCount = this.querySelector('span.js-likes');
+        const icone = this.querySelector('i.in');
+
+        axios.get(url).then(function(response) {
+            
+            spanCount.textContent = response.data.likes;
+            if(icone.classList.contains('fa-thumbs-up')) {
+
+                icone.classList.replace('fa-thumbs-up', 'fa-thumbs-o-up');
+            }
+            else {
+                icone.classList.replace('fa-thumbs-o-up', 'fa-thumbs-up');
+            }
+        }).catch(function(error){
+            if(error.response.status === 403){
+                alert("Vous devez etre connecter pour liker une video");
+            }else {
+                alert("Une erreur s'est produite, réessayez plus tard");
+            }
+        })
+    }
+
+
+    document.querySelectorAll('a.js-like').forEach(function(link){
+        link.addEventListener('click', onClickBtnLike);
+    })
+
+    </script>
 
 {% endblock %}

@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Serializable;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VideoRepository;
-use Serializable;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
@@ -75,9 +76,15 @@ class Video implements Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="videoLike")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -234,6 +241,51 @@ class Video implements Serializable
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|PostLike[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(PostLike $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setVideoLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(PostLike $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getVideoLike() === $this) {
+                $like->setVideoLike(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Permet de savoir si un utilisaterur a "liké" une vidéo
+     *
+     * @param User $user
+     * @return boolean
+     */
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->likes as $like) {
+            if ($like->getUser() === $user)
+                return true;
+        }
+        return false;
     }
 }
 

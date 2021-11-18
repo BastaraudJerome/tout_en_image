@@ -19,7 +19,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
 
             'photos' => $photoRepository->findBy([],["updatedAt"=>"DESC"], 4),
-            'videos' => $videoRepository->findBy([],["updatedAt"=>"DESC"], 2),       
+            'videos' => $videoRepository->findBy([],["updatedAt"=>"DESC"], 4),       
             'homeContent' => $homeRepository->findOneBy(["active"=>true]),
         ]);
     }
