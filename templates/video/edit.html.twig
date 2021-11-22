@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Edit Video{% endblock %}
+
+{% block body %}
+<div class="container" style="padding-top:100px">
+<h1>
+    Editer mes vidéos
+</h1>
+<a class="btn btn-primary my-1" href="{{ path('profile') }}">
+    Retour
+        
+    
+</a>
+
+{{ form_start(form) }}
+{{ form_label(form.titre) }}
+{{ form_widget(form.titre) }}
+{{ form_label(form.description) }}
+{{ form_widget(form.description) }}
+{{ form_label(form.categorie) }}
+{{ form_widget(form.categorie) }}
+{{ form_label(form.imageFile) }}
+{{ form_widget(form.imageFile) }}
+<button type="submit" class="btn btn-primary mt-3">
+    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+</button>
+
+{{ form_end(form) }}
+
+</div>
+   
+
+
+
+
+
+{% endblock %}

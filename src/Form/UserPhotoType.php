@@ -18,7 +18,7 @@ class UserPhotoType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('imageFile', FileType::class, ["required" => false, "label"=>'Photo'])           
-            ->add('Ajouter', SubmitType::class, ['attr'=>["class"=>"btn btn-primary my-2"]])
+            ->remove('Ajouter', SubmitType::class, ['attr'=>["class"=>"btn btn-primary my-2"]])
             ->remove('users')
             ->remove('imageSize')
             ->remove('updatedAt')

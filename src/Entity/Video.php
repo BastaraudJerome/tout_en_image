@@ -77,7 +77,7 @@ class Video implements Serializable
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="videoLike")
+     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="videoLike",cascade={"persist", "remove"})
      */
     private $likes;
 

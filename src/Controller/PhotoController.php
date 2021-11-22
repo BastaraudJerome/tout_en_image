@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Photo;
 use DateTimeImmutable;
+use App\Form\PhotoType;
 use App\Entity\Comments;
 use App\Entity\PostLike;
 use App\Form\CommentsType;
@@ -41,6 +42,26 @@ class PhotoController extends AbstractController
         return $this->render('photo/index.html.twig', [
             'photo' => $photoForm->createView(),
             'photos' => $photoRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("photo/{id}/edit", name="photo_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Photo $photo): Response
+    {
+        $form = $this->createForm(UserPhotoType::class, $photo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('photo', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('photo/edit.html.twig', [
+            'photo' => $photo,
+            'form' => $form,
         ]);
     }
 

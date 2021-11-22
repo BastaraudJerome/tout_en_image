@@ -46,6 +46,26 @@ class VideoController extends AbstractController
     }
 
     /**
+     * @Route("video/{id}/edit", name="vide_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Video $video): Response
+    {
+        $form = $this->createForm(UserVideoType::class, $video);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('video', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('video/edit.html.twig', [
+            'video' => $video,
+            'form' => $form,
+        ]);
+    }
+
+    /**
      * 
      *@Route("/video/addvideo")
      */

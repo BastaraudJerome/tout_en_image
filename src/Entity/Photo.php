@@ -70,7 +70,7 @@ class Photo implements Serializable
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=PostLike::class, mappedBy="post",cascade={"persist", "remove"})
      */
     private $likes;
 

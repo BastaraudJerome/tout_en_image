@@ -62,7 +62,7 @@
                                                     
                             </th>
                             <th scope="col">
-                                Auteur
+                                Description
                                                     
                             </th>
                             <th scope="col">
@@ -81,20 +81,15 @@
                                     {{ photo.titre }}
                                 </td>
                                 <td>
-                                    {% if user.pseudo is defined and user.pseudo is not null %}
-                                        {{ user.pseudo }}
-                                    {% else %}
-                                        {% if user.nom is defined and user.nom is not null %}
-                                            {{ user.nom }}
-                                        {% endif %}
-                                        {% if user.prenom is defined and user.prenom is not null %}
-                                            {{ user.prenom }}
-                                        {% endif %}
-                                    {% endif %}
+                                    {{ photo.description }}
                                 </td>
+                                
                                 <td>
                                     <a href="{{ path('deletePhotoListe', {'id': photo.id}) }}" class="btn" style="border:1px solid black;background:#ED4C40">
                                         <i class="fa fa-trash"></i>
+                                    </a>
+                                    <a href="{{ path('photo_edit', {'id': photo.id}) }}">
+                                        <i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -110,6 +105,9 @@
                 <div class="container">
                     {{form_start(photo)}}
                         {{form_widget(photo)}}
+                        <button type="submit" class="btn btn-primary mt-3">
+                            Ajouter
+                        </button>
                     {{form_end(photo)}}
                 </div>      
         </div>
@@ -124,6 +122,10 @@
                             </th>
                             <th scope="col">
                                 Titre
+                                                    
+                            </th>
+                            <th scope="col">
+                                Description
                                                     
                             </th>
                             <th scope="col">
@@ -148,20 +150,17 @@
                                         {{ video.titre }}
                                     </td>
                                     <td>
-                                        {% if user.pseudo is defined and user.pseudo is not null %}
-                                            {{ user.pseudo }}
-                                        {% else %}
-                                            {% if user.nom is defined and user.nom is not null %}
-                                                {{ user.nom }}
-                                            {% endif %}
-                                            {% if user.prenom is defined and user.prenom is not null %}
-                                                {{ user.prenom }}
-                                            {% endif %}
-                                        {% endif %}
+                                        {{ video.description }}
+                                    </td>
+                                     <td>
+                                        {{ video.categorie }}
                                     </td>
                                 <td>
                                     <a href="{{ path('deleteVideoListe', {'id': video.id}) }}" class="btn" style="border:1px solid black;background:#ED4C40">
                                         <i class="fa fa-trash"></i>
+                                    </a>
+                                    <a href="{{ path('vide_edit', {'id': video.id}) }}">
+                                        <i class="fa fa-pencil btn btn-primary-edit" aria-hidden="true"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -176,6 +175,9 @@
                 <div class="container">
                     {{ form_start(video) }}
                     {{ form_widget(video) }}
+                    <button type="submit" class="btn btn-primary mt-3">
+                            Ajouter
+                        </button>
                     {{ form_end(video) }}
                 </div>
         </div>

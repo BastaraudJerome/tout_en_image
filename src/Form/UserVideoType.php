@@ -22,7 +22,7 @@ class UserVideoType extends AbstractType
             ->remove('updatedAt')
             ->add('categorie')
             ->add('imageFile', FileType::class, ["required" => false, "label"=>'Video'])          
-            ->add('Ajouter', SubmitType::class, ['attr'=>["class"=>"btn btn-primary my-2"]])
+            ->remove('Ajouter', SubmitType::class, ['attr'=>["class"=>"btn btn-primary my-2"]])
         ;
     }
 
