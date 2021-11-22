@@ -2,7 +2,10 @@
   //     body {
   //   height: 100%;
   // }
-  
+  #monCarousel{
+    z-index: 1;
+    top: 70px;
+  }
   h1.titre-carousel{
     text-shadow: 2px 2px 2px black;
     
@@ -18,4 +21,7 @@
     height:100%;
     text-shadow: 2px 2px 2px black;
     left: 0;    
+}
+.ti{
+  object-fit: cover;
 }

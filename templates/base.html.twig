@@ -11,8 +11,9 @@
         {% block stylesheets %}{% endblock %}     
     </head>
     <body>
+    <header></header>
         {# NAVBAR #}
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light fixed w-100">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img class="logo" src="{{ asset('logo/logo_small_icon_only_inverted.png') }}" alt="logo">
@@ -292,7 +293,35 @@
         <script src="{{asset("js/calendar.js")}}"></script>
         <script src="{{asset("js/jquery.min.js")}}"></script>
         <script src="{{asset("js/popper.js+bootstrap.min.js.pagespeed.jc.qtuvqM8cmH.js")}}"></script>
-        
+<script>
+    $(document).ready(function() {
+
+    // Calculer la hauteur de <header>
+    // Utilisez externalHeight() au lieu de height() si vous avez un padding
+    var aboveHeight = $('header').externalHeight();
+
+    // lors du défilement
+    $(window).scroll(function(){
+
+        // si le défilement est supérieur à la hauteur de l'en-tête
+        if ($(window).scrollTop() > aboveHeight){
+
+            // si oui, ajoutez la classe "fixe" au <nav>
+            // ajouter un padding en haut au #content 
+            // (la valeur est la même que la hauteur de la nav)
+            $('nav').addClass('fixed').css('top','0').next().css('padding-top','70px');
+
+        } else {
+
+            // lorsque vous faites défiler vers le haut ou moins qu'au-dessus de la hauteur,
+            // supprimer la classe "fixe", et le padding-top
+            $('nav').removeClass('fixed').next().css('padding-top','0');
+        }
+    });
+    
+});
+</script>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

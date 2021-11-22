@@ -5,8 +5,12 @@ body {
 { 
  text-decoration:none; 
 } 
+.fixed{
+    position: fixed;
+}
     .navbar{
         background-color: $ctaColor;
+        z-index: 2;
         
     }
     

@@ -29,7 +29,7 @@ class Video implements Serializable
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      * 
      * @Vich\UploadableField(mapping="videos", fileNameProperty="videoName", size="videoSize")
-     * 
+     * @Assert\File(maxSize="1g")
      * @var File|null
      */
     private $imageFile;

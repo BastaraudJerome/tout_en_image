@@ -3,10 +3,10 @@
 {% block title %}Planning{% endblock %}
 
 {% block body %}
-    <div class="container p-3 justify-content-center">
+    <div class="container calendar ms-auto">
         <div class="row">
-            <div class="col-12 py-3">
-                <div class="content w-100">
+            <div class="col-12 pos">
+                <div class="content">
                     <div class="calendar-container">
                         <div class="calendar">
                             <div class="year-header">
@@ -206,22 +206,22 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="button" id="add-button">
+                            {# <button class="button" id="add-button">
                                 Voir detail
-                            </button>
+                            </button> #}
                         </div>
                     </div>
                     <div class="events-container">
                         
                     </div>
-                    <div class="dialog" id="dialog" style="display: none;">
+                    {# <div class="dialog" id="dialog" style="display: none;">
                         <h2 class="dialog-header">
                             Nouvel évenement 
                         </h2>
                         <form class="form" id="form">
                             <div class="form-container" align="center">
                                 <label class="form-label" id="valueFromMyButton" for="name">
-                                    Non
+                                    Nom
                                 </label>
                                 <input class="input" type="text" id="name" maxlength="36">
                                     <label class="form-label" id="valueFromMyButton" for="count">
@@ -235,7 +235,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> #}
                 </div>    
             </div>    
         </div>    

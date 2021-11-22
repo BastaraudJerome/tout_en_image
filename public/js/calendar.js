@@ -104,50 +104,46 @@
       url: "/date/event",
       type: "GET",
       dataType: "json",
+      data: "date=" +jour,
       async: true,
       success: function (dateEvent) {
         //console.log(dateEvent);
-        var events = [];
-        
-        for (var i = 0; i < dateEvent.length; i++){
-          var event = dateEvent[i];
-         //console.log(dateEvent[i]);
-            if (event["date"] === jour) {
-              
-              console.log(event);
-              console.log(jour);
-              
-              var event_card = $("<div class='event-card'></div>");
-              var event_cours = $(
-                "<div class='event-name'>" + dateEvent[i].cours + ":</div>"
-              );
-              var event_lieux = $(
-                "<div class='event-count'>" +
-                  dateEvent[i].lieux +
-                  " " +
-                  dateEvent[i].horaire +
-                  "</div>"
-              );
-              
-              $(event_card).append(event_cours).append(event_lieux);
-              $(".events-container").empty();
-              $(".events-container").show(250);
-              $(".events-container").append(event_card);
-            } else {
-              console.log("test");
-              var event_card = $("<div class='event-card'></div>");
-              var event_name = $(
-                "<div class='event-name p-1'>Aucun évenement prévu pour le " +
-                  jour +
-                  ".</div>"
-              );
-              $(event_card).css({ "border-left": "10px solid #edd34d" });
-              $(event_card).append(event_name);
-              $(".events-container").empty();
-              $(".events-container").append(event_card);
-            }
+        var event_card = $("<div class='event-card'></div>");
+        if(dateEvent.length === 0){
 
-        } 
+          //console.log("vide");
+          
+          var event_name = $(
+            "<div class='event-name p-1'>Aucun évenement prévu pour le " +
+              jour +
+              ".</div>"
+          );
+          $(event_card).css({ "border-left": "10px solid #edd34d" });
+          $(event_card).append(event_name);
+          $(".events-container").empty();
+          $(".events-container").append(event_card);
+
+        } else {
+
+          for (var i = 0; i < dateEvent.length; i++){
+            
+                var event_cours = $(
+                  "<div class='event-name'>" + dateEvent[i].cours + ":</div>"
+                );
+                var event_lieux = $(
+                  "<div class='event-count'>" +
+                    dateEvent[i].lieux +
+                    " " +
+                    dateEvent[i].horaire +
+                    "</div>"
+                );
+                $(event_card).append(event_cours).append(event_lieux);
+                $(".events-container").empty();
+                $(".events-container").show(250);
+                $(".events-container").append(event_card);
+          } 
+        }
+        
       },
       error: function (xhr, textStatus, errorThrown) {
         alert("Ajax request failed.");
