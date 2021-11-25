@@ -19,19 +19,14 @@ class DateEventController extends AbstractController
      */
     public function index(Request $request): Response
     {
-
         $events = $this->getDoctrine() 
                         ->getRepository(Planning::class) 
                         ->findByDate(new DateTimeImmutable($request->get('date'))); 
-
-                         
-                
-//dd($events);
+ 
                 $temp = [];
                 
                     foreach ($events as $event) {
-                    
-    
+                       
                         $date = $event->getDate()->format('d F Y');
                         $horaire = $event->getHoraire()->format('H:i:s');
                         $temp[] = array(
@@ -43,13 +38,9 @@ class DateEventController extends AbstractController
                         );
                         
                     }
-                
-                
 
                 return new JsonResponse($temp);     
              
-            
-        
         return $this->render('date_event/index.html.twig', [
 
             'event' => $events

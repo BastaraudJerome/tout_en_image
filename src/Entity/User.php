@@ -181,7 +181,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        //  garantis que chaque utilisateur aura un ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -242,7 +242,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Get cette props sert a la mise en place d'un select option pour le chois de role au niveau du formulaire de creation ou de modification d'un user
+     * Get cette props sert a la mise en place d'un select option pour le choix de role au niveau du formulaire de creation ou de modification d'un user
      */ 
     public function getRole()
     {

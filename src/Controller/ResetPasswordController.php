@@ -31,7 +31,7 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Display & process form to request a password reset.
+     * Procedure pour reinitialise son mot de passe.
      */
     #[Route('', name: 'app_forgot_password_request')]
     public function request(Request $request, MailerInterface $mailer): Response

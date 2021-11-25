@@ -1,23 +1,23 @@
 (function ($) {
-  "use strict";
+  ("use strict");
 
-  // Setup the calendar with the current date
+  // initialise le calendrier a la date du jour
   $(document).ready(function () {
     var date = new Date();
     var today = date.getDate();
-    // Set click handlers for DOM elements
+    // On ajoute des ecouteur d'evenement au click pour suivant est precedant
     $(".right-button").click({ date: date }, next_year);
     $(".left-button").click({ date: date }, prev_year);
     $(".month").click({ date: date }, month_click);
     $("#add-button").click({ date: date }, new_event);
-    // Set current month as active
+    // ajoute une class .active-month au mois en cours
     $(".months-row").children().eq(date.getMonth()).addClass("active-month");
     init_calendar(date);
     var events = check_events(today, date.getMonth() + 1, date.getFullYear());
     //show_events(events, months[date.getMonth()], today);
   });
 
-  // Initialize the calendar by appending the HTML dates
+  // Initialise le calendrier en ajoutant les dates presente dans le HTML
   function init_calendar(date) {
     $(".tbody").empty();
     $(".events-container").empty();
@@ -52,11 +52,11 @@
           curr_date.addClass("active-date");
           //show_events(events, months[month], day);
         }
-        // If this date has any events, style it with .event-date
+        // Si cette date a des événements, on ajoute la class .event-date
         if (events.length !== 0) {
           curr_date.addClass("event-date");
         }
-        // Set onClick handler for clicking a date
+        // Active la fonction date_click quand on click sur une date
         curr_date.click(
           { events: events, month: months[month], day: day, year: year },
           date_click
@@ -64,35 +64,34 @@
         row.append(curr_date);
       }
     }
-    // Append the last row and set the current year
+    // Ajoute la dernière ligne et définie l'année en cours
     calendar_days.append(row);
     $(".year").text(year);
   }
 
-  // Get the number of days in a given month/year
+  // Récupère le nombre de jours dans un mois/une année donné
   function days_in_month(month, year) {
     var monthStart = new Date(year, month, 1);
     var monthEnd = new Date(year, month + 1, 1);
     return (monthEnd - monthStart) / (1000 * 60 * 60 * 24);
   }
-  
-  
-  // Event handler for when a date is clicked
+
+  // Ecouteur d'evenement lorsque l'on click sur une date
   function date_click(event) {
-    var jourFormat = event.data.day < 10 ? "0" + event.data.day : event.data.day;
-    var jour =  jourFormat +' '+ event.data.month +' '+ event.data.year;
+    var jourFormat =
+      event.data.day < 10 ? "0" + event.data.day : event.data.day;
+    var jour = jourFormat + " " + event.data.month + " " + event.data.year;
     //console.log(event);return null;
     $(".events-container").show(250);
     $("#dialog").hide(250);
     $(".active-date").removeClass("active-date");
     $(this).addClass("active-date");
     ajax_get_events(jour);
-    
   }
-/**
- * 
- * @param {string} date_event 
- */
+  /**
+   *
+   * @param {string} date_event
+   */
   function ajax_get_events(date_event) {
     //console.log("ajax_get_events: ", date_event);
     var jour = date_event;
@@ -104,15 +103,14 @@
       url: "/date/event",
       type: "GET",
       dataType: "json",
-      data: "date=" +jour,
+      data: "date=" + jour,
       async: true,
       success: function (dateEvent) {
         //console.log(dateEvent);
         var event_card = $("<div class='event-card'></div>");
-        if(dateEvent.length === 0){
-
+        if (dateEvent.length === 0) {
           //console.log("vide");
-          
+
           var event_name = $(
             "<div class='event-name p-1'>Aucun évenement prévu pour le " +
               jour +
@@ -122,28 +120,24 @@
           $(event_card).append(event_name);
           $(".events-container").empty();
           $(".events-container").append(event_card);
-
         } else {
-
-          for (var i = 0; i < dateEvent.length; i++){
-            
-                var event_cours = $(
-                  "<div class='event-name'>" + dateEvent[i].cours + ":</div>"
-                );
-                var event_lieux = $(
-                  "<div class='event-count'>" +
-                    dateEvent[i].lieux +
-                    " " +
-                    dateEvent[i].horaire +
-                    "</div>"
-                );
-                $(event_card).append(event_cours).append(event_lieux);
-                $(".events-container").empty();
-                $(".events-container").show(250);
-                $(".events-container").append(event_card);
-          } 
+          for (var i = 0; i < dateEvent.length; i++) {
+            var event_cours = $(
+              "<div class='event-name'>" + dateEvent[i].cours + ":</div>"
+            );
+            var event_lieux = $(
+              "<div class='event-count'>" +
+                dateEvent[i].lieux +
+                " " +
+                dateEvent[i].horaire +
+                "</div>"
+            );
+            $(event_card).append(event_cours).append(event_lieux);
+            $(".events-container").empty();
+            $(".events-container").show(250);
+            $(".events-container").append(event_card);
+          }
         }
-        
       },
       error: function (xhr, textStatus, errorThrown) {
         alert("Ajax request failed.");
@@ -152,7 +146,6 @@
 
     return false;
   }
-  
 
   // Event handler for when a month is clicked
   function month_click(event) {
@@ -238,7 +231,7 @@
   //     month: date.getMonth() + 1,
   //     day: day,
   //     date: date,
-      
+
   //   };
   //   event_data["events"].push(event);
   // }
@@ -262,13 +255,13 @@
   //     $(event_card).css({ "border-left": "10px solid #edd34d" });
   //     $(event_card).append(event_name);
   //     $(".events-container").append(event_card);
-  //   } 
+  //   }
   //   else {
   //     // Go through and add each event as a card to the events container
-     
-  //     var event_card = $("<div class='event-card'></div>"); 
+
+  //     var event_card = $("<div class='event-card'></div>");
   //     for (var i = 0; i < events.length; i++) {
-        
+
   //       var event_name = $(
   //         "<div class='event-name'>" + events[i]["occasion"] + ":</div>"
   //       );
@@ -277,7 +270,7 @@
   //           events[i]["invited_count"] +
   //           " Invited</div>"
   //       );
-        
+
   //       if (events[i]["cancelled"] === true) {
   //         $(event_card).css({
   //           "border-left": "10px solid #EDD34D",
@@ -290,26 +283,22 @@
   //   }
   // }
 
-  
-
   // Checks if a specific date has any events
   function check_events(day, month, year) {
-    
     var events = [];
-    
-      for (var i = 0; i < event_data["events"].length; i++) {
-        var event = event_data["events"][i];
-        if (
-          event["day"] === day &&
-          event["month"] === month &&
-          event["year"] === year
-        ) {
-          events.push(event);
-        }
-      }
 
-      return events;
-    
+    for (var i = 0; i < event_data["events"].length; i++) {
+      var event = event_data["events"][i];
+      if (
+        event["day"] === day &&
+        event["month"] === month &&
+        event["year"] === year
+      ) {
+        events.push(event);
+      }
+    }
+
+    return events;
   }
 
   // Given data for events in JSON format
@@ -330,7 +319,6 @@
         month: 12,
         day: 11,
       },
-      
     ],
   };
 

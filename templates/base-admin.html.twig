@@ -114,13 +114,13 @@
                         <div class="small">Connecté entant que:</div>
                         {% if app.user.pseudo is defined and app.user.pseudo is not null %}
                         {{ app.user.pseudo  }}
-                        <img src="{{asset('images/avatars/' ~ app.user.avatar)}}" alt="{{ app.user.avatar }}" class="avatar">                                
+                        <img src="{{asset('images/avatars/' ~ app.user.avatar.imageName)| imagine_filter('my_thumb40')}}" alt="{{ app.user.avatar }}" class="avatar">                                
                         {% elseif app.user.firstname is defined and app.user.firstname is not null %}
                         {{ app.user.firstname }}
-                        <img src="{{asset('images/avatars/' ~ app.user.avatar)}}" alt="{{ app.user.avatar }}" class="avatar">
+                        <img src="{{asset('images/avatars/' ~ app.user.avatar.imageName)| imagine_filter('my_thumb40')}}" alt="{{ app.user.avatar }}" class="avatar">
                         {% else %}
                         {{ app.user.email }}
-                        <img src="{{asset('images/avatars/' ~ app.user.avatar)}}" alt="{{ app.user.avatar }}" class="avatar">
+                        <img src="{{asset('images/avatars/' ~ app.user.avatar.imageName)| imagine_filter('my_thumb40')}}" alt="{{ app.user.avatar }}" class="avatar">
                         {% endif %}
                     </div>
                 </nav>

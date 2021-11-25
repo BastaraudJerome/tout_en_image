@@ -54,8 +54,6 @@ class Video implements Serializable
      */
     private $updatedAt;
 
-    
-
     /**
      * @ORM\Column(type="string", length=255)
      */

@@ -25,8 +25,11 @@ class PhotoController extends AbstractController
     */
     public function index(Request $request, PhotoRepository $photoRepository): Response
     {
+        // On recuperer l'utilisateur connecter
         $user = $this->getUser();
+        // On instancie la création d'une nouvelle photo
         $photo = new Photo;
+        // On crée un formulaire dédié
         $photoForm = $this->createForm(UserPhotoType::class, $photo);
         $photoForm->handleRequest($request);
         if($photoForm->isSubmitted() && $photoForm->isValid()){
@@ -38,7 +41,7 @@ class PhotoController extends AbstractController
             return $this->redirectToRoute("photo");
         };
         
-
+        // On redirige vers le template pour l'affichage côté front
         return $this->render('photo/index.html.twig', [
             'photo' => $photoForm->createView(),
             'photos' => $photoRepository->findAll(),
@@ -155,10 +158,6 @@ class PhotoController extends AbstractController
      * Permet de like ou unliker une photo
      * 
      * @Route("/photo/{id}/like", name="photo_like")
-     *
-     * @param Photo $photo
-     * @param PostLikeRepository $postLikeRepository
-     * @return Response
      */
     public function like(Photo $photo, PostLikeRepository $postLikeRepository): Response
     {

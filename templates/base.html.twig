@@ -3,9 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Tout En Image{% endblock %}</title>
+            {# liens font awesome #}
         <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+        {# liens bootstrap #}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
         <link rel="stylesheet" href="https://bootswatch.com/5/sandstone/bootstrap.min.css">
+        {# liens feuille css #}
         <link rel="stylesheet" href="{{ asset('css/admin.min.css') }}">
         
         {% block stylesheets %}{% endblock %}     
@@ -60,18 +63,18 @@
                             </a>
                         </li>
                         {% endif %}
-                        <li class="nav-item">
+                        {# <li class="nav-item">
                             <a class="nav-link" href="#">
                                 Billeterie
                             </a>
-                        </li>
+                        </li> #}
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 Equipes
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ path('contact') }}">
                                 Contact
                             </a>
                         </li>                      
@@ -117,9 +120,6 @@
         
     {% block body %}{% endblock %}
     
-            
-        
-        
         {# FOOTER #}
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -286,10 +286,14 @@
                 </div>        
             </footer>
         </div>
-        {# FIN FOOTER #}        
+        {# FIN FOOTER #}  
+              {# liens JQuery #}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        {# liens pour axios #}
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        {# lien bootstrap #}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        {# liens poiur les feuille de stype personaliser #}
         <script src="{{asset("js/calendar.js")}}"></script>
         <script src="{{asset("js/jquery.min.js")}}"></script>
         <script src="{{asset("js/popper.js+bootstrap.min.js.pagespeed.jc.qtuvqM8cmH.js")}}"></script>
