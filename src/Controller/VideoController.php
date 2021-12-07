@@ -97,38 +97,28 @@ class VideoController extends AbstractController
         //partie commentaire
         //on crée le commentaire vierge
         $comment = new Comments;
-
         // on génère le formulaire
         $form = $this->createForm(CommentsType::class, $comment);
-
         $form->handleRequest($request);
-
         //traitement du formulaire
         if($form->isSubmitted() && $form->isValid()){
             $comment->setCreatedAt(new DateTimeImmutable());
             $comment->setVideos($video);
-
             // on récupere le contenus du champ parentid
             $parentid = $form->get("parentid")->getData();
-
             // on va chercher le commentaire correspondant
             $em = $this->getDoctrine()->getManager();
-
             if($parentid != null ){
                 $parent = $em->getRepository(Comments::class)->find($parentid);
             }
-            
-
             //on définit le parent
             $comment->setParent($parent ?? null );
 
             $em->persist($comment);
             $em->flush();
-
             $this->addFlash('success', 'Votre commentaire a bien été envoyé');
             return $this->redirectToRoute('VideoComments', ['id' => $id]);
         }
-
         return $this->render('video/video-comments.html.twig', [
             'videos' => $videoRepository->find($id), 
             'form' => $form->createView(),

@@ -8,6 +8,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ContactType extends AbstractType
 {
@@ -18,7 +19,7 @@ class ContactType extends AbstractType
             ->add('prenom')
             ->add('email', EmailType::class)
             ->add('sujet')
-            ->add('message', CKEditorType::class)
+            ->add('message',TextareaType::class)
         ;
     }
 
